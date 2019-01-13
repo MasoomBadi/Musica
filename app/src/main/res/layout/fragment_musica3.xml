@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/splashscreen_gradient">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_gravity="top"
+        android:layout_marginTop="@dimen/appBarTopMargin"
+        android:background="@android:color/transparent"
+        android:theme="@style/Theme.AppCompat"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:elevation="12dp"
+            app:cardBackgroundColor="@android:color/transparent"
+            app:cardCornerRadius="15dp">
+
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#33000000" />
+
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
+                        android:orientation="vertical"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginEnd="20dp"
+                            android:orientation="horizontal">
+
+                            <com.thegalaxysoftware.musica.Widgets.CircleImageView
+                                android:id="@+id/album_art"
+                                android:layout_width="56dp"
+                                android:layout_height="56dp"
+                                android:layout_centerInParent="true"
+                                android:layout_gravity="center"
+                                android:background="@android:color/transparent"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/defaultmusic" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+
+
+                                <TextView
+                                    android:id="@+id/song_title"
+                                    style="@style/TextAppearance.AppCompat.Body1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="20dp"
+                                    android:layout_marginEnd="20dp"
+                                    android:ellipsize="marquee"
+                                    android:fadingEdge="horizontal"
+                                    android:fontFamily="@font/ubuntu_bold"
+                                    android:marqueeRepeatLimit="marquee_forever"
+                                    android:scrollHorizontally="true"
+                                    android:singleLine="true"
+                                    android:textColor="@color/white"
+                                    android:textSize="22sp" />
+
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/song_artist"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:layout_marginLeft="96dp"
+                            android:layout_marginRight="20dp"
+                            android:ellipsize="end"
+                            android:fontFamily="@font/ubuntu_light"
+                            android:maxLines="1"
+                            android:paddingTop="3dp"
+                            android:textColor="@color/white"
+                            android:textSize="13sp" />
+
+
+                        <TextView
+                            android:id="@+id/song_album"
+                            android:layout_width="wrap_content"
+                            android:layout_gravity="end"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="96dp"
+                            android:fontFamily="@font/ubuntu"
+                            android:textColor="@color/white"
+                            android:visibility="gone" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="48dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="32dp"
+                        android:background="@drawable/timely_border_round_corner"
+                        android:paddingStart="16dp"
+                        android:paddingTop="32dp"
+                        android:paddingEnd="16dp"
+                        android:paddingBottom="32dp"
+                        app:layout_constraintBottom_toTopOf="@+id/linearLayout7"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/linearLayout5">
+
+                        <include
+                            layout="@layout/song_elapsedtime"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout7"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="32dp"
+                        android:layout_marginBottom="24dp"
+                        app:layout_constraintBottom_toTopOf="@+id/linearLayout8"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/linearLayout6">
+
+                        <SeekBar
+                            android:id="@+id/song_progress"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:maxHeight="2dp"
+                            android:progress="30"
+                            android:tag="tint_accent_color" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="24dp"
+                        android:background="@drawable/timely_border_round_corner"
+                        android:orientation="horizontal"
+                        android:padding="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/linearLayout7">
+
+                        <ImageView
+                            android:id="@+id/shuffle"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:layout_weight="1"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:scaleType="center" />
+
+                        <net.steamcrafted.materialiconlib.MaterialIconView
+                            android:id="@+id/previous"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:layout_weight="1"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:scaleType="center"
+                            app:materialIcon="skip_previous_circle"
+                            app:materialIconColor="#fff"
+                            app:materialIconSize="35dp" />
+
+                        <FrameLayout
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="5dp"
+                            android:layout_weight="1">
+
+                            <com.thegalaxysoftware.musica.Widgets.PlayPauseButton
+                                android:id="@+id/playpause"
+                                android:layout_width="23dp"
+                                android:layout_height="23dp"
+                                android:layout_gravity="center" />
+
+                            <View
+                                android:id="@+id/playpausewrapper"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="?attr/selectableItemBackgroundBorderless" />
+                        </FrameLayout>
+
+                        <net.steamcrafted.materialiconlib.MaterialIconView
+                            android:id="@+id/next"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:layout_weight="1"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:scaleType="center"
+                            app:materialIcon="skip_next_circle"
+                            app:materialIconColor="#fff"
+                            app:materialIconSize="35dp" />
+
+                        <ImageView
+                            android:id="@+id/repeat"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:layout_weight="1"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:paddingLeft="5dp"
+                            android:scaleType="center" />
+
+                    </LinearLayout>
+
+                </android.support.constraint.ConstraintLayout>
+
+            </FrameLayout>
+
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

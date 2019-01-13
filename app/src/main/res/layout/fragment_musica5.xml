@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:diagonal="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <LinearLayout
+            android:id="@+id/diagonalLayout"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="0dp"
+            android:layout_weight="0.6">
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.thegalaxysoftware.musica.SlantViewGroup.DiagonalLayout
+
+                    android:id="@+id/diagonalLayout2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingBottom="50dp"
+                    diagonal:diagonal_angle="12"
+                    diagonal:diagonal_direction="left"
+                    diagonal:diagonal_position="bottom">
+
+                    <ImageView
+                        android:id="@+id/album_art"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerInParent="true"
+                        android:layout_gravity="center"
+                        android:background="@android:color/transparent"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/defaultmusic" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="?attr/actionBarSize"
+                        android:background="#22000000"/>
+                </com.thegalaxysoftware.musica.SlantViewGroup.DiagonalLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:clipToPadding="false"
+                    android:elevation="8dp"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="@+id/diagonalLayout2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent">
+
+                    <TextView
+                        android:id="@+id/song_title"
+                        style="@style/TextAppearance.AppCompat.Body1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:ellipsize="marquee"
+                        android:fadingEdge="horizontal"
+                        android:fontFamily="@font/ubuntu_bold"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:scrollHorizontally="true"
+                        android:singleLine="true"
+                        android:textSize="22sp" />
+
+                    <TextView
+                        android:id="@+id/song_artist"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/ubuntu_light"
+                        android:maxLines="1"
+                        android:paddingTop="3dp"
+                        android:textSize="13sp" />
+
+
+                    <TextView
+                        android:id="@+id/song_album"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_marginStart="96dp"
+                        android:fontFamily="@font/ubuntu"
+                        android:textColor="@color/white"
+                        android:visibility="gone" />
+                </LinearLayout>
+
+            </android.support.constraint.ConstraintLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            android:layout_weight="0.4">
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.thegalaxysoftware.musica.SlantViewGroup.DiagonalLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    diagonal:diagonal_angle="8"
+                    android:paddingTop="10dp"
+                    diagonal:diagonal_direction="left"
+                    diagonal:diagonal_position="top">
+
+                    <ImageView
+                        android:id="@+id/album_art_blurred"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#66000000"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        android:layout_gravity="center_horizontal|center_vertical">
+
+                        <ImageView
+                            android:id="@+id/shuffle"
+                            android:layout_width="48dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_height="48dp"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:scaleType="center" />
+
+                        <net.steamcrafted.materialiconlib.MaterialIconView
+                            android:id="@+id/previous"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="30dp"
+                            android:layout_weight="0.6"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:scaleType="center"
+                            app:materialIcon="skip_previous"
+                            app:materialIconColor="?attr/iconColor"
+                            app:materialIconSize="35dp" />
+
+                        <FrameLayout
+                            android:layout_width="75dp"
+                            android:layout_height="75dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="5dp"
+                            android:layout_weight="1">
+
+
+                            <android.support.design.widget.FloatingActionButton
+                                android:id="@+id/playpausefloating"
+                                android:layout_width="55dp"
+                                android:layout_height="55dp"
+                                android:layout_gravity="center"
+                                android:clickable="true"
+                                android:scaleType="fitCenter"
+                                android:tag="bg_tint_accent_color" />
+                        </FrameLayout>
+
+                        <net.steamcrafted.materialiconlib.MaterialIconView
+                            android:id="@+id/next"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:layout_gravity="center"
+                            android:layout_marginEnd="30dp"
+                            android:layout_weight="0.6"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:scaleType="center"
+                            app:materialIcon="skip_next"
+                            app:materialIconColor="?attr/iconColor"
+                            app:materialIconSize="35dp" />
+
+                        <ImageView
+                            android:id="@+id/repeat"
+                            android:layout_width="48dp"
+                            android:paddingTop="5dp"
+                            android:layout_height="48dp"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:layout_marginEnd="10dp"
+                            android:scaleType="center" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom|start"
+                        android:layout_marginBottom="20dp"
+                        android:orientation="vertical">
+
+                        <SeekBar
+                            android:id="@+id/song_progress"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:maxHeight="2dp"
+                            android:paddingTop="10dp"
+                            android:progress="30"
+                            android:tag="tint_accent_color" />
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/song_elapsed_time"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/ubuntu"
+                                android:layout_alignParentStart="true"
+                                android:paddingStart="25dp" />
+
+                            <TextView
+                                android:id="@+id/song_duration"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:fontFamily="@font/ubuntu"
+                                android:paddingEnd="25dp" />
+                        </RelativeLayout>
+
+                    </LinearLayout>
+
+                </com.thegalaxysoftware.musica.SlantViewGroup.DiagonalLayout>
+
+
+            </FrameLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_gravity="top"
+        android:background="@android:color/transparent"
+        android:theme="@style/Theme.AppCompat"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+</android.support.constraint.ConstraintLayout>
