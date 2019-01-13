@@ -9,7 +9,7 @@ Ad Free Online/Offline Music Player.
 2. Fetch Album art from online source.
 3. Fetch Artist image from online source.
 4. Theme Customization along with predefiened Light and Dark Theme.
-5. User can choose different colors of them.
+5. User can choose different colors of theme (RGB and Pre defiened Presets).
 6. Last FM online Scrobble.
 7. Last FM account sync.
 8. Google Chromecast, casting support.
