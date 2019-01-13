@@ -32,3 +32,5 @@ Ad Free Online/Offline Music Player.
 * Google Maven Centeral.
 * Jsoup, OkHTTP
 * Google Material Design V:28.0.0 (Android Pie Support)
+* [Material Design Icons](https://github.com/code-mc/material-icon-lib)
+* [Modified ATE Theme Engine](https://github.com/MasoomBadi/app-theme-engine) (Original Author - Aidan Follestad)
