@@ -26,6 +26,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -65,6 +66,7 @@ public class LyricsFragment extends Fragment implements ConnectivityReciever.Con
     ScrollView mainContent;
     MaterialIconView refreshLayout;
     RecyclerView fetchedResults;
+    ProgressBar progressBar;
     boolean isConnected;
     int isExecuted = 0;
     LinearLayout noconnectivity;
@@ -89,12 +91,14 @@ public class LyricsFragment extends Fragment implements ConnectivityReciever.Con
         noconnectivity = (LinearLayout) rootView.findViewById(R.id.no_connectivity);
         mainContent = (ScrollView) rootView.findViewById(R.id.lyrics);
         fetchedResults = (RecyclerView) rootView.findViewById(R.id.lyrics_search_result_display);
-        refreshLayout = (MaterialIconView)rootView.findViewById(R.id.refresh_layout);
+        refreshLayout = (MaterialIconView) rootView.findViewById(R.id.refresh_layout);
+        progressBar = (ProgressBar)rootView.findViewById(R.id.progressBar);
 
 
         fetchedResults.setAdapter(adapter);
         noconnectivity.setVisibility(View.GONE);
         fetchedResults.setVisibility(View.GONE);
+
 
         searchedResult = new ArrayList<>();
 
@@ -115,10 +119,11 @@ public class LyricsFragment extends Fragment implements ConnectivityReciever.Con
                 searchedLyrics.setArguments(args);
 
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
-                ft.add(R.id.fragment_container, searchedLyrics).commit();
+                ft.add(R.id.fragment_container, searchedLyrics).addToBackStack(getClass().getName()).commit();
 
             }
         });
+
 
         isConnected = ConnectivityReciever.isConnected();
         if (isConnected) {
@@ -197,11 +202,12 @@ public class LyricsFragment extends Fragment implements ConnectivityReciever.Con
                     @Override
                     protected void onPreExecute() {
                         super.onPreExecute();
-                        lyricsTextView.setText("Searching...");
+                        progressBar.setVisibility(View.VISIBLE);
                     }
 
                     @Override
                     protected void onPostExecute(Void aVoid) {
+                        progressBar.setVisibility(View.GONE);
                         if (lyrics.length() == 0) {
                             lyrics = "No Lyrics Found, Sorry :(";
                         }
@@ -217,7 +223,8 @@ public class LyricsFragment extends Fragment implements ConnectivityReciever.Con
                             lyrics = Jsoup.connect(finalizedUrl).get().html();
                             lyrics = lyrics.split(uppartition)[1];
                             lyrics = lyrics.split(downparition)[0];
-                            lyrics = lyrics.replace("<br>", "").replace("</br>", "").replace("</div", "").replace("<", "").replace(">", "");
+                            lyrics = lyrics.replace("<br>", "").replace("</br>", "").replace("</div", "").replace("<", "").replace(">", ""
+                                    .replace("<i>", "").replace("</i>", "").replace("<b>", "").replace("</b>", ""));
 
                         } catch (IOException e) {
                             e.printStackTrace();
@@ -241,22 +248,27 @@ public class LyricsFragment extends Fragment implements ConnectivityReciever.Con
                     @Override
                     protected void onPreExecute() {
                         super.onPreExecute();
-                        lyricsTextView.setText("Searching...");
+                        progressBar.setVisibility(View.VISIBLE);
                     }
 
                     @Override
                     protected void onPostExecute(Void aVoid) {
                         super.onPostExecute(aVoid);
-                        searchedResult.remove(0);
-                        int size = searchedResult.size();
-                        searchedResult.remove(size - 1);
-                        fetchedResults.setAdapter(adapter);
-                        adapter.notifyDataSetChanged();
-
-
-                        for(int i = 0; i < searchedResult.size(); i++)
+                        progressBar.setVisibility(View.GONE);
+                        if (searchedResult.size() >= 2) {
+                            searchedResult.remove(0);
+                            int size = searchedResult.size();
+                            searchedResult.remove(size - 1);
+                            fetchedResults.setAdapter(adapter);
+                            adapter.notifyDataSetChanged();
+                        }
+                        if(searchedResult.size() == 0)
                         {
-                            Log.d("Adapter", i+" : " + searchedResult.get(i).getSongName());
+                            mainContent.setVisibility(View.VISIBLE);
+                            fetchedResults.setVisibility(View.GONE);
+
+                            lyrics = "No results found, Sorry :(";
+                            lyricsTextView.setText(lyrics);
                         }
                     }
 
@@ -264,6 +276,7 @@ public class LyricsFragment extends Fragment implements ConnectivityReciever.Con
                     protected Void doInBackground(Void... voids) {
                         try {
                             Document doc = Jsoup.connect(seachURL).get();
+                            Log.e("DOC", doc.childNodeSize() + "");
                             Element table = doc.select("table").get(0);
                             Elements rows = table.select("tr");
 
@@ -271,7 +284,7 @@ public class LyricsFragment extends Fragment implements ConnectivityReciever.Con
                             suggestedsongs = new String[rows.size()];
                             songartist = new String[rows.size()];
 
-                            Log.d("Size", rows.size()+"");
+                            Log.d("Size", rows.size() + "");
 
                             for (int i = 0; i < rows.size(); i++) {
                                 SearchLyricsResult lyricsResult = new SearchLyricsResult();
@@ -283,12 +296,9 @@ public class LyricsFragment extends Fragment implements ConnectivityReciever.Con
 
                                 link = linkurl.attr("abs:href");
 
-                                if(i == 0 && i == rows.size())
-                                {
+                                if (i == 0 && i == rows.size()) {
 
-                                }
-                                else
-                                {
+                                } else {
                                     suggestedsongs[i] = titleName.toString().replace("<b>", "").replace("</b>", "");
                                     songartist[i] = artistName.toString().replace("<b>", "").replace("</b>", "");
                                     abslinks[i] = link;
@@ -303,6 +313,8 @@ public class LyricsFragment extends Fragment implements ConnectivityReciever.Con
                         } catch (IOException e) {
                             e.printStackTrace();
                             Toast.makeText(getActivity(), "Oopsy, TimeOut.. Try Again later.", Toast.LENGTH_SHORT).show();
+                        } catch (IndexOutOfBoundsException e) {
+                            e.printStackTrace();
                         }
                         return null;
                     }
