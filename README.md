@@ -13,13 +13,13 @@ Ad Free Online/Offline Music Player.
 6. Last FM online Scrobble.
 7. Last FM account sync.
 8. Google Chromecast, casting support.
-9. Search lyrics (In progress..)
+9. Search lyrics.
 ```
 
 ## Planning TO-DO
 
 ```
-1. Podcast
+1. Podcast. (In progress..)
 2. International Radiostation Music
 3. Fetch latest trending global musics, albums.
 4. Billboard Top 100, Spotify Top.
